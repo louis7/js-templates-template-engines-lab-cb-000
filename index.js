@@ -1,28 +1,30 @@
+function createPost() {
+  // create template functions
+  var pageTemplate = _.template(document.getElementById("page-template").innerHTML);
+  var postTemplate = _.template(document.getElementById("post-template").innerHTML);
+  var commentsTemplate = _.template(document.getElementById("comments-template").innerHTML);
 
+  // get blog values
+  var postTitle = document.getElementById("postTitle").value;
+  var postAuthor = document.getElementById("postAuthor").value;
+  var post = document.getElementById("postBody").value;
 
-function createPost(){
-  //retrieve the commeenter name , comments and the template
+  document.getElementsByTagName("main")[0].innerHTML += pageTemplate();
 
-  let commenterName = document.getElementById('commenterName').value
-  let commets = document.getElementById('commentText').value
-  let commentTemplate =document/getElementById('comment-template').innerHTML
+  var blogSection = postTemplate({ 'title': postTitle, 'body': post, 'poster': postAuthor });
+  var commentsSection = commentsTemplate();
+  var postElement = document.getElementById("post");
 
-  //find the location where we will dynamicaly add our comment
-  let commentsDiv = document.getElementById('comments');
-
-
-  //make it a dinamic template by giving it to lodash
-
-  let templateFn = _.template(commentTemplate);
-
-
-  //execute template function with JSON object for the interpolated values
-  let templateHTML = templateFn({ comment: comment, commenter: commenter });
-
-  //append rather than replace!
-  commentsDiv.innerHTML += templateHTML;
-
-
+  postElement.innerHTML = blogSection;
+  postElement.getElementsByTagName("footer")[0].innerHTML = commentsSection;
 }
 
-createPost();
+function postComment() {
+  var commentTemplate = _.template(document.getElementById("comment-template").innerHTML);
+
+  var commentText = document.getElementById("commentText").value;
+  var commenterName = document.getElementById("commenter").value;
+
+  var commentsSection = document.getElementById("comments");
+  commentsSection.innerHTML += commentTemplate({ 'commenter': commenterName, 'comment': commentText });
+}
