@@ -8,6 +8,16 @@
     </main>
     <script src="node_modules/lodash/lodash.min.js"></script>
     <script src="index.js"></script>
+
+
+
+    <!-- form section-->
+
+    <form id = "post-for" onsubmit="postComment();return false;">
+      Name: <input type="text" id="commenterName"><br>
+      Comment: <input type="textarea" id="commentText"><br>
+      <input type="submit">
+    </form>
     <!-- Open this file and call `mocha.run()` in console to run tests -->
     <div id="mocha"></div>
     <script src="node_modules/mocha/mocha.js"></script>
